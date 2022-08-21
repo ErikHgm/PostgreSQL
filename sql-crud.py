@@ -96,19 +96,37 @@ erik_hagman = Programmer(
 #session.add(erik_hagman)
 
 # updating a single record
-programmer = session.query(Programmer).filter_by(id=13).first()
-programmer.famous_for = "Former basketball player"
+#programmer = session.query(Programmer).filter_by(id=13).first()
+#programmer.famous_for = "Former basketball player"
 
 # updating multiple records
-people = session.query(Programmer)
-for person in people:
-    if person.gender == "F":
-        person.gender = "Female"
-    elif person.gender == "M":
-        person.gender = "Male"
+#people = session.query(Programmer)
+#for person in people:
+#    if person.gender == "F":
+#        person.gender = "Female"
+#    elif person.gender == "M":
+#        person.gender = "Male"
+#    else:
+#        print("Gender not defined")
+#    session.commit()
+
+# deleting a single record
+fname = input("Enter a persons first name: ")
+lname = input("Enter a persons last name: ")
+programmer = session.query(Programmer).filter_by(first_name =fname, last_name = lname).first()
+#defensive programming
+if programmer is not None:
+    print("Programmer found: " +programmer.first_name + " " + programmer.last_name)
+    confirm = input("Are you sure you want to delete programmer? (y/n) ")
+    if confirm.lower() == "y":
+        session.delete(programmer)
+        session.commit()
+        print("Programmer deleted")
     else:
-        print("Gender not defined")
-    session.commit()
+        print("Programmer not deleted")
+else:
+    print("Programmer not found")
+        
 
 
 # query the database to show all programmers
