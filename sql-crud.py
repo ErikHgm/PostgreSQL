@@ -9,6 +9,18 @@ from sqlalchemy.orm import sessionmaker
 db = create_engine("postgresql:///chinook")
 base = declarative_base()
 
+class Programmer(base):
+    __tablename__ = "Programmer"
+    id = Column(Integer, primary_key = True
+    first_name = Column(String)
+    last_name = Column(String)
+    gender = Column(String)
+    nationality = Column(String)
+    famous_for = Column(String)
+
+
+
+
 # instead of connecting to the database directly, we will ask for a session
 # create a new instance of sessionmaker, then point to our engine (the db)
 Session = sessionmaker(db)
